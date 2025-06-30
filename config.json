@@ -1,0 +1,28 @@
+{
+  "source_type": "youtube",
+  "video_url": "https://www.youtube.com/watch?v=JRFVPry3CHs",
+  "artist": "Oasis",
+  "album": "MTV Acoustic Live",
+  "cover_image": "C:/Users/dlega/Desktop/oasis_acoustic.jpg",
+  "output_format": "mp3",
+  "tracks": [
+    {
+      "title": "Whatever",
+      "start": "00:00:00",
+      "end": "00:4:17",
+      "number": 1
+    },
+    {
+      "title": "Live Forever",
+      "start": "00:04:18",
+      "end": "00:08:30",
+      "number": 2
+    },
+    {
+      "title": "Stand By Me",
+      "start": "00:08:31",
+      "end": "00:12:53",
+      "number": 3
+    }
+  ]
+}
