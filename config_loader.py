@@ -1,6 +1,6 @@
-from pydantic import BaseModel, HttpUrl, FilePath, field_validator
+from pydantic import BaseModel, HttpUrl, FilePath, DirectoryPath
 from typing import List, Optional, Literal
-import json, datetime
+import json
 
 
 class Track(BaseModel):
@@ -9,19 +9,18 @@ class Track(BaseModel):
     end: str
     number: Optional[int] = None
 
-class Config(BaseModel):
+class Concert(BaseModel):
     source_type: Literal['youtube', 'local']
     video_url: Optional[HttpUrl] = None
-    source: Optional[str] = None
+    file_source: Optional[FilePath] = None
     artist: Optional[str] = None
     album: Optional[str] = None
     cover_image: Optional[FilePath] = None
     output_format: Literal['mp3', 'flac'] = 'mp3'
     tracks: List[Track]
+    output_dir: DirectoryPath
 
-
-
-def load_concert(path: str) -> Config:
+def load_concert(path: str) -> Concert:
     with open(path) as f:
         data = json.load(f)
-    return Config(**data)
+    return Concert(**data)
