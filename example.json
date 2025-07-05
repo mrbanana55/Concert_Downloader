@@ -1,6 +1,6 @@
 {
   "source_type": "local",
-  "file_source": "C:/Users/dlega/Desktop/Concert_Downloader/audio.mp3",
+  "file_source": "C:/Users/dlega/Desktop/concert_audio.mp4",
   "artist": "Oasis",
   "album": "MTV Acoustic Live",
   "cover_image": "C:/Users/dlega/Desktop/oasis_acoustic.jpg",
@@ -23,7 +23,7 @@
       "title": "Stand By Me",
       "start": "00:08:31",
       "end": "00:12:53",
-      "number": 4
+      "number": 3
     }
   ]
 }

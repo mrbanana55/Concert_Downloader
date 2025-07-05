@@ -1,6 +1,9 @@
 from config_loader import load_concert
 from core import downloader, audio_extractor, splitter, tagger
+import os
 
+#Pending: Verify all folders exist, if not create them
+#Pending: What if it's a youtube source
 
 try:
     concert = load_concert('example.json')
@@ -32,13 +35,24 @@ elif (concert.source_type == 'local'):
             exit(1)
     try:
         splitter.audio_split(full_audio_path, './temp', concert)
+        print("Audio split successfully. Proceeding to tagging.")
+        os.remove(full_audio_path)  if not str(concert.file_source).endswith('.mp3') else None
     except Exception as e:
         print(f"Error splitting audio: {e}")
+        for file in os.listdir('./temp'):
+            os.remove(os.path.join('./temp', file))
+        exit(1)
+
+    try:
+        tagger.add_metadata('./temp', concert.output_dir, concert)
+        print("Metadata added successfully.")
+        for file in os.listdir('./temp'):
+            os.remove(os.path.join('./temp', file))
+
+    except Exception as e:
+        print(f"Error adding metadata: {e}")
         exit(1)
 
 else:
     print(f"Unsupported source: {concert.source_type}. Please use 'youtube' or 'local'.")
     exit(1)
-
-# splitter.audio_split('audio.mp3', './temp', concert)
-# tagger.add_metadata('./temp', concert.output_dir, concert)
