@@ -4,6 +4,8 @@ import subprocess, ffmpeg
 def convert_audio(input_file: str, output_file: str):
     command = [
         "ffmpeg",
+        "-hide_banner",
+        "-loglevel", "error",
         "-i", input_file,
         output_file
     ]

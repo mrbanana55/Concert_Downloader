@@ -7,6 +7,8 @@ def add_metadata(input_dir: str, output_dir: str, concert):
 
         command = [
             "ffmpeg",
+            "-hide_banner",
+            "-loglevel", "error",
             "-i", input_file,
             "-i", concert.cover_image,
             "-map", "0:a",

@@ -8,6 +8,8 @@ def audio_split(input_file: str, output_dir: str, concert):
 
         command = [
             "ffmpeg",
+            "-hide_banner",
+            "-loglevel", "error",
             "-ss", start_time,
             "-to", end_time,
             "-i", input_file,

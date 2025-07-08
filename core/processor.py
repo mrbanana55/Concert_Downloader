@@ -2,7 +2,6 @@ from config_loader import load_concert
 from core import downloader, audio_extractor, splitter, tagger
 import os
 
-# Pending: Verify all folders exist, if not create them
 
 # Try to load the concert configuration from a JSON file
 try:
@@ -11,6 +10,13 @@ except Exception as e:
     # If there's an error loading the concert config, print it and exit
     print(f"Error loading concert configuration: {e}")
     exit(1)
+
+os.makedirs("./temp", exist_ok=True)
+if not os.path.isdir(concert.output_dir):
+    print(f"Output directory {concert.output_dir} does not exist. Please use a valid directory.")
+    exit(1)
+
+
 
 # Check if the source type is either 'youtube' or 'local'
 if concert.source_type not in ['youtube', 'local']:
