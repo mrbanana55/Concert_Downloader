@@ -1,8 +1,13 @@
 from core import processor
 from config_loader import load_concert
-import os
+import os, click
 
-json_example = "example.json"
+"""
+TO DO
+
+2. make prettier cli with rich
+"""
+
 
 def validate_concert(json_file):
     # Try to load the concert configuration from a JSON file
@@ -16,9 +21,18 @@ def validate_concert(json_file):
         print(f"Error loading concert configuration: {e}")
         exit(1)
 
-if __name__ == "__main__":
-
+@click.command()
+@click.argument("json_file", type=click.Path(exists=True, dir_okay=False, readable=True))
+def main(json_file):
+    print(json_file)
     os.makedirs("./temp", exist_ok=True)
-    concert = validate_concert(json_example)
+    concert = validate_concert(json_file)
     processor.pipeline(concert)
+
+
+
+if __name__ == "__main__":
+    main()
+    
+
 
