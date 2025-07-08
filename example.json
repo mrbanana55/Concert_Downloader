@@ -4,25 +4,22 @@
   "artist": "Oasis",
   "album": "MTV Acoustic Live",
   "cover_image": "C:/Users/dlega/Desktop/oasis_acoustic.jpg",
-  "output_format": "mp3",
   "output_dir": "C:/Users/dlega/Desktop/Concert_Downloader/output",
+  "duration": "00:12:54",
   "tracks": [
     {
       "title": "Whatever",
       "start": "00:00:00",
-      "end": "00:04:17",
       "number": 1
     },
     {
       "title": "Live Forever",
-      "start": "00:04:18",
-      "end": "00:08:30",
+      "start": "00:04:17",
       "number": 2
     },
     {
       "title": "Stand By Me",
-      "start": "00:08:31",
-      "end": "00:12:53",
+      "start": "00:08:30",
       "number": 3
     }
   ]

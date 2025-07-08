@@ -3,7 +3,7 @@ import os, subprocess
 def audio_split(input_file: str, output_dir: str, concert):
     for i, track in enumerate(concert.tracks):
         start_time = track.start
-        end_time = track.end
+        end_time = concert.tracks[i + 1].start if i + 1 < len(concert.tracks) else concert.duration
         output_file = os.path.join(output_dir, f"{i}. {track.title}.mp3")
 
         command = [

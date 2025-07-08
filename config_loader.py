@@ -6,7 +6,7 @@ import json
 class Track(BaseModel):
     title: str
     start: str
-    end: str
+    # end: str
     number: Optional[int] = None
 
 class Concert(BaseModel):
@@ -15,8 +15,8 @@ class Concert(BaseModel):
     file_source: Optional[FilePath] = None
     artist: Optional[str] = None
     album: Optional[str] = None
+    duration: str
     cover_image: Optional[FilePath] = None
-    output_format: Literal['mp3', 'flac'] = 'mp3'
     tracks: List[Track]
     output_dir: DirectoryPath
 
