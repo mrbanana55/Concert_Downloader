@@ -2,27 +2,11 @@ from config_loader import load_concert
 from core import downloader, audio_extractor, splitter, tagger
 import os
 
-def pipeline(json_file):
-    # Try to load the concert configuration from a JSON file
-    try:
-        print(f"Loading concert from {json_file}...")
-        concert = load_concert(json_file)  # Load the concert configuration
-        print("Concert configuration loaded successfully.")
-    except Exception as e:
-        # If there's an error loading the concert config, print it and exit
-        print(f"Error loading concert configuration: {e}")
-        exit(1)
+def pipeline(concert):
+    
 
     if not os.path.isdir(concert.output_dir):
         print(f"Output directory {concert.output_dir} does not exist. Please use a valid directory.")
-        exit(1)
-
-
-
-    # Check if the source type is either 'youtube' or 'local'
-    if concert.source_type not in ['youtube', 'local']:
-        # If not, print an error and exit
-        print(f"Unsupported source: {concert.source_type}. Please use 'youtube' or 'local'.")
         exit(1)
 
     # Case where the source is YouTube
