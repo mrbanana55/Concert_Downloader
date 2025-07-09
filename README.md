@@ -17,33 +17,42 @@
 ## 🛠️ Installation
 
 ### Prerequisites
-You need the following things installed for this to work.
+You'll need the following installed on your system:
 * [Python.](https://www.python.org/)
 * [FFmpeg.](https://www.gyan.dev/ffmpeg/builds/)
 ### Setup
 1. Clone this repository.
-   ```
+   ```bash
    git clone https://github.com/mrbanana55/Concert_Downloader.git
+   cd Concert_Downloader
    ```
-2. Create a virtual enviroment (optional).
-3. Install dependencies.
+2. (Optional) Create a virtual environment:
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate  # Windows
+   source venv/bin/activate  # macOS/Linux
    ```
+3. Install dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
-5. If you want to run it from anywhere, add the project folder to your system's path.
-    1. Change `path/to/main.py` to your absolute path for the main.py file inside `concert_downloader.bat`.
-    2. Add the absolute path of the folder to your system's environment variables.
-    3. now you should be able to call it like `concert_downloader path\to\your_config.json`
-##  Usage
-You need to create a JSON file like the example ones and pass it as a concert_downloader parameter like this:
-```
-concert-downloader path/to/config.json
-```
-```
+4. (Optional) If you want to run it from anywhere:
+   * Edit the `concert_downloader.bat` file and replace `path/to/main.py` with the absolute path to your `main.py` file.
+   * Add the folder containing `concert_downloader.bat` to your system’s PATH.
+   * Now you can call it like this:
+     ```bash
+     concert_downloader path/to/config.json 
+     ```
+##  🚀 Usage
+You need to pass a JSON config file as an argument. You can run it like:
+```bash
 python main.py path/to/config.json
+# or, if using .bat setup:
+concert_downloader path/to/config.json
 ```
-### Example 1: Local Video or Audio File
-```
+## Example Configs
+### Local File Example
+```json
 {
   "source_type": "local",
   "file_source": "C:/path/to/concert_audio.mp4",
@@ -72,10 +81,10 @@ python main.py path/to/config.json
 }
 
 ```
-### Example 2: Youtube Video
-```
+### YouTube Example
+```json
 {
-  "source_type": "yotube",
+  "source_type": "youtube",
   "video_url": "https://www.youtube.com/watch?v=example_video_id",
   "artist": "Artist Example",
   "album": "Album Example",
@@ -101,11 +110,13 @@ python main.py path/to/config.json
   ]
 }
 ```
-#### Note
-The following parameters are optional:
-  * number.
-  * artist.
-  * album.
-  * cover_image.
+## Optional Fields
+| Field        | Description                       |
+|--------------|-----------------------------------|
+| `artist`     | Used for metadata (defaults to blank) |
+| `album`      | Used for metadata (defaults to blank) |
+| `cover_image`| Embed album art if provided       |
+| `number`     | Track number for ordering         |
+
 ## Output
-After running the conncert_downloader you will get individual .mp3 files per track with their respective metadata.
+After running `concert_downloader` you will get individual `.mp3` files per track with their respective metadata.
