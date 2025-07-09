@@ -1,4 +1,5 @@
 import os, subprocess
+from cli.styles import console
 
 def add_metadata(input_dir: str, output_dir: str, concert):
     for track in concert.tracks:
@@ -8,7 +9,7 @@ def add_metadata(input_dir: str, output_dir: str, concert):
         command = [
             "ffmpeg",
             "-hide_banner",
-            "-loglevel", "error",
+            "-loglevel", "quiet",
             "-i", input_file,
             "-i", concert.cover_image,
             "-map", "0:a",
@@ -23,6 +24,6 @@ def add_metadata(input_dir: str, output_dir: str, concert):
             ]
         try:
             subprocess.run(command, check=True)
-            print(f"Added metadata to track: {track.title}")
+            console.print(f"\t[important]Added metadata to track:[/important] [important_bold]{track.title}[/important_bold]")
         except subprocess.CalledProcessError as e:
-            print(f"Error adding metadata to track {track.title}: {e}")
+            console.print(f"[error_title]Error adding metadata to track {track.title}:[error_title] [error_message]{e}[/error_message]")

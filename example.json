@@ -1,6 +1,6 @@
 {
-  "source_type": "youtube",
-  "video_url": "https://www.youtube.com/watch?v=JRFVPry3CHs",
+  "source_type": "local",
+  "file_source": "C:/Users/dlega/Desktop/concert_audio.mp4",
   "artist": "Oasis",
   "album": "MTV Acoustic Live",
   "cover_image": "C:/Users/dlega/Desktop/oasis_acoustic.jpg",

@@ -1,4 +1,5 @@
 import os, subprocess
+from cli.styles import console
 
 def audio_split(input_file: str, output_dir: str, concert):
     for i, track in enumerate(concert.tracks):
@@ -21,6 +22,6 @@ def audio_split(input_file: str, output_dir: str, concert):
 
         try:
             subprocess.run(command, check=True)
-            print(f"\033[31mSplit and saved track: {track.title}. start: {start_time}, end: {end_time}\033[0m")
+            console.print(f"\t[important]Split and saved track:[/important] [important_bold]{track.title}[/important_bold]. [important]start: {start_time}, end: {end_time}[/important]")
         except subprocess.CalledProcessError as e:
-            print(f"Error splitting track {track.title}: {e}")
+            print(f"[error_title]Error splitting track {track.title}:[/error_title] [error_message]{e}[/error_message]")

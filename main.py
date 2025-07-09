@@ -32,6 +32,7 @@ def main(json_file):
         return
     console.print("Starting concert processing...", style="info_text")
     processor.pipeline(concert)
+    console.print(f"Concert processing completed successfully. Songs are located at: {concert.output_dir}", style="success_title")
 
 
 
