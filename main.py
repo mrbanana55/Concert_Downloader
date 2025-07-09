@@ -35,7 +35,7 @@ def main(json_file):
     console.print("Starting concert processing...", style="info_text")
     processor.pipeline(concert)
     console.print(f"Concert processing completed successfully. Songs are located at: {concert.output_dir}", style="success_title")
-    
+    os.rmdir("./temp")
     notification.notify(
         title="Concert Processing Complete",
         message=f"Songs are located at: {concert.output_dir}",
