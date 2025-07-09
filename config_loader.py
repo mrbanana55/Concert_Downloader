@@ -6,7 +6,6 @@ import json
 class Track(BaseModel):
     title: str
     start: str
-    # end: str
     number: Optional[int] = None
 
 class Concert(BaseModel):

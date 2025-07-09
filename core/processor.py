@@ -1,15 +1,9 @@
-from config_loader import load_concert
 from core import downloader, audio_extractor, splitter, tagger
+from cli.styles import console
 import os
 
 def pipeline(concert):
     
-
-    if not os.path.isdir(concert.output_dir):
-        print(f"Output directory {concert.output_dir} does not exist. Please use a valid directory.")
-        exit(1)
-
-    # Case where the source is YouTube
     if (concert.source_type == 'youtube'):
         try:
             # Download the audio from YouTube as an MP4 file

@@ -1,32 +1,36 @@
 from core import processor
 from config_loader import load_concert
-import os, click
-
-"""
-TO DO
-
-2. make prettier cli with rich
-"""
+from cli.styles import console
+from cli.render_json import render_json
+import os, click, time
 
 
 def validate_concert(json_file):
     # Try to load the concert configuration from a JSON file
     try:
-        print(f"Loading concert from {json_file}...")
         concert = load_concert(json_file)  # Load the concert configuration
-        print("Concert configuration loaded successfully.")
         return concert
     except Exception as e:
         # If there's an error loading the concert config, print it and exit
-        print(f"Error loading concert configuration: {e}")
+        console.print(f"[error_title]Error loading concert configuration:[/error_title] [error_message]{e}[/error_message]")
         exit(1)
 
 @click.command()
 @click.argument("json_file", type=click.Path(exists=True, dir_okay=False, readable=True))
 def main(json_file):
-    print(json_file)
+    
     os.makedirs("./temp", exist_ok=True)
-    concert = validate_concert(json_file)
+
+    with console.status("validating concert...", spinner="dots"):
+        concert = validate_concert(json_file)
+    console.print("Concert configuration loaded successfully.", style="success_message")
+    
+    render_json(concert)
+    accept = console.input("\n[important]Press y to start processing the concert, or any other key to exit: [/important]")
+    if accept.lower() != 'y':
+        console.print("Exiting without processing the concert.", style="important")
+        return
+    console.print("Starting concert processing...", style="info_text")
     processor.pipeline(concert)
 
 
