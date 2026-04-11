@@ -35,6 +35,10 @@ You'll need the following installed on your system:
    ```bash
    pip install .
    ```
+   or if you want to use it globally:
+   ```bash
+   pipx install .
+   ```
 
 ---
 
