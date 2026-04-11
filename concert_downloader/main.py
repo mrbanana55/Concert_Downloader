@@ -4,7 +4,6 @@ from concert_downloader.ui.styles import console
 from concert_downloader.ui.render_json import render_json
 from concert_downloader.errors import ConcertError
 import click
-from plyer import notification
 
 
 def validate_concert(json_file):
@@ -33,12 +32,6 @@ def main(json_file):
     console.print("Starting concert processing...", style="info_text")
     processor.pipeline(concert)
     console.print(f"Concert processing completed successfully. Songs are located at: {concert.output_dir}", style="success_title")
-    notification.notify(
-        title="Concert Processing Complete",
-        message=f"Songs are located at: {concert.output_dir}",
-        app_name="Concert Processor",
-        timeout=5
-    )
 
 
 if __name__ == "__main__":
