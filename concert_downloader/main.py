@@ -1,7 +1,7 @@
 from concert_downloader.core import processor
 from concert_downloader.config_loader import load_concert
-from concert_downloader.cli.styles import console
-from concert_downloader.cli.render_json import render_json
+from concert_downloader.ui.styles import console
+from concert_downloader.ui.render_json import render_json
 from concert_downloader.errors import ConcertError
 import click
 from plyer import notification

@@ -1,0 +1,2 @@
+[console_scripts]
+concert_downloader = concert_downloader.main:main

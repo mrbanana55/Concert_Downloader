@@ -26,7 +26,7 @@ dependencies = [
 ]
 
 [project.scripts]
-concert_downloader = "concert_downloader.cli:main"
+concert_downloader = "concert_downloader.main:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
