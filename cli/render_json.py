@@ -1,6 +1,6 @@
 from cli.styles import console
 from rich.table import Table
-from config_loader import load_concert
+from concert_downloader.config_loader import load_concert
 
 def render_json(json):
     table = Table(title="\nConcert Songs", show_lines=True)

@@ -1,5 +1,6 @@
-import os, subprocess
-from cli.styles import console
+import os, subprocess, logging
+
+logger = logging.getLogger(__name__)
 
 def audio_split(input_file: str, output_dir: str, concert):
     for i, track in enumerate(concert.tracks):
@@ -22,6 +23,6 @@ def audio_split(input_file: str, output_dir: str, concert):
 
         try:
             subprocess.run(command, check=True)
-            console.print(f"\t[important]Split and saved track:[/important] [important_bold]{track.title}[/important_bold]. [important]start: {start_time}, end: {end_time}[/important]")
+            logger.info(f"Split and saved track: {track.title}. start: {start_time}, end: {end_time}")
         except subprocess.CalledProcessError as e:
-            print(f"[error_title]Error splitting track {track.title}:[/error_title] [error_message]{e}[/error_message]")
+            logger.error(f"Error splitting track {track.title}:{e}")

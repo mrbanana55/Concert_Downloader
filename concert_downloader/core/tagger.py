@@ -1,5 +1,6 @@
-import os, subprocess
-from cli.styles import console
+import os, subprocess, logging
+
+logger = logging.getLogger(__name__)
 
 def add_metadata(input_dir: str, output_dir: str, concert):
     for track in concert.tracks:
@@ -24,6 +25,6 @@ def add_metadata(input_dir: str, output_dir: str, concert):
             ]
         try:
             subprocess.run(command, check=True)
-            console.print(f"\t[important]Added metadata to track:[/important] [important_bold]{track.title}[/important_bold]")
+            logger.info(f"Added metadata to track:{track.title}")
         except subprocess.CalledProcessError as e:
-            console.print(f"[error_title]Error adding metadata to track {track.title}:[error_title] [error_message]{e}[/error_message]")
+            logger.info(f"Error adding metadata to track {track.title}: {e}")

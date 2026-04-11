@@ -1,7 +1,5 @@
 from pydantic import BaseModel, HttpUrl, FilePath, DirectoryPath
 from typing import List, Optional, Literal
-import json
-
 
 class Track(BaseModel):
     title: str
@@ -18,8 +16,3 @@ class Concert(BaseModel):
     cover_image: Optional[FilePath] = None
     tracks: List[Track]
     output_dir: DirectoryPath
-
-def load_concert(path: str) -> Concert:
-    with open(path) as f:
-        data = json.load(f)
-    return Concert(**data)

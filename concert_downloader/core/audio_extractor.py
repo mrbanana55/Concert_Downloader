@@ -1,5 +1,6 @@
-import subprocess, ffmpeg
-from cli.styles import console
+import subprocess, ffmpeg, logging
+
+logger = logging.getLogger(__name__)
 
 #Convert the audio to the desired format
 def convert_audio(input_file: str, output_file: str):
@@ -12,7 +13,7 @@ def convert_audio(input_file: str, output_file: str):
     ]
     try:
         subprocess.run(command, check=True)
-        console.print(f"\t[important]Converted {input_file} to {output_file}[/important]")
+        logger.info(f"Converted {input_file} to {output_file}")
 
     except ffmpeg.Error as e:
-        print(f"[error_title]Error converting audio:[/error_title] [error_message]{e}[/error_message]")
+        logger.error(f"Error converting audio: {e}")
