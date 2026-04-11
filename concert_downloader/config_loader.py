@@ -1,4 +1,4 @@
-from models import Concert
+from concert_downloader.models import Concert
 import json
 
 def load_concert(path: str) -> Concert:

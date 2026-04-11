@@ -1,9 +1,9 @@
 from concert_downloader.core import processor
 from concert_downloader.config_loader import load_concert
-from cli.styles import console
-from cli.render_json import render_json
+from concert_downloader.cli.styles import console
+from concert_downloader.cli.render_json import render_json
 from concert_downloader.errors import ConcertError
-import os, click
+import click
 from plyer import notification
 
 
@@ -33,7 +33,6 @@ def main(json_file):
     console.print("Starting concert processing...", style="info_text")
     processor.pipeline(concert)
     console.print(f"Concert processing completed successfully. Songs are located at: {concert.output_dir}", style="success_title")
-    os.rmdir("./temp")
     notification.notify(
         title="Concert Processing Complete",
         message=f"Songs are located at: {concert.output_dir}",

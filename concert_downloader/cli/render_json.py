@@ -1,4 +1,4 @@
-from cli.styles import console
+from concert_downloader.cli.styles import console
 from rich.table import Table
 from concert_downloader.config_loader import load_concert
 
