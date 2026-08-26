@@ -3,7 +3,6 @@
   "video_url": "https://www.youtube.com/watch?v=ferZnZ0_rSM",
   "artist": "Anderson .Paak",
   "album": "Tiny Desk",
-  "cover_image": "./Example/image.webp",
   "output_dir": "./Example/output/",
   "duration": "00:15:37",
   "tracks": [
