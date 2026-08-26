@@ -16,9 +16,76 @@ def validate_concert(json_file):
         raise ConcertError(f"Error loading concert configuration: {e}") from e
 
 
-@click.command()
-@click.argument("json_file", type=click.Path(exists=True, dir_okay=False, readable=True))
-def main(json_file):
+LOCAL_EXAMPLE = """{
+  "source_type": "local",
+  "file_source": "/path/to/concert_audio.mp4",
+  "artist": "Artist Example",
+  "album": "Album Example",
+  "cover_image": "/your/image.jpg",
+  "output_dir": "/your/output/folder",
+  "duration": "00:30:54",
+  "tracks": [
+    { "title": "Song 1", "start": "00:00:00", "number": 1 },
+    { "title": "Song 2", "start": "00:04:17", "number": 2 },
+    { "title": "Song 3", "start": "00:08:30", "number": 3 }
+  ]
+}"""
+
+YOUTUBE_EXAMPLE = """{
+  "source_type": "youtube",
+  "video_url": "https://www.youtube.com/watch?v=example_video_id",
+  "artist": "Artist Example",
+  "album": "Album Example",
+  "cover_image": "/your/image.jpg",
+  "output_dir": "/your/output/folder",
+  "duration": "00:30:54",
+  "tracks": [
+    { "title": "Song 1", "start": "00:00:00", "number": 1 },
+    { "title": "Song 2", "start": "00:04:17", "number": 2 },
+    { "title": "Song 3", "start": "00:08:30", "number": 3 }
+  ]
+}"""
+
+def print_examples():
+    console.print("\n[important_bold]Local File Example:[/important_bold]")
+    console.print(LOCAL_EXAMPLE)
+    console.print("\n[important_bold]YouTube Example:[/important_bold]")
+    console.print(YOUTUBE_EXAMPLE)
+
+def print_missing_input_help():
+    console.print("An input .json file is required to run the concert downloader.", style="error_message")
+    console.print("Please provide a path to your .json file or use --example to see sample configurations.", style="info_text")
+    console.print("For more help, visit: https://github.com/mrbanana55", style="important")
+
+def print_help():
+    console.print("[info_title]Concert Downloader CLI[/info_title]\n")
+    console.print("Download and split concerts from YouTube or local files into individual tagged MP3 tracks.\n")
+    console.print("[important_bold]Usage:[/important_bold]")
+    console.print("  concert_downloader <JSON_FILE> [OPTIONS]\n")
+    console.print("[important_bold]Arguments:[/important_bold]")
+    console.print("  JSON_FILE       Path to the JSON configuration file containing concert info.\n")
+    console.print("[important_bold]Options:[/important_bold]")
+    console.print("  --example       Show sample JSON configuration files for local files and YouTube.")
+    console.print("  -h, --help      Show this help message and exit.\n")
+    console.print("[important_bold]Documentation & Issues:[/important_bold]")
+    console.print("  https://github.com/mrbanana55")
+
+@click.command(add_help_option=False)
+@click.argument("json_file", required=False, type=click.Path(exists=True, dir_okay=False, readable=True))
+@click.option("--example", is_flag=True, help="Show JSON configuration examples.")
+@click.option("-h", "--help", is_flag=True, help="Show help message.")
+def main(json_file, example, help):
+    if example:
+        print_examples()
+        return
+
+    if help:
+        print_help()
+        return
+
+    if not json_file:
+        print_missing_input_help()
+        return
 
     with console.status("validating concert...", spinner="dots"):
         concert = validate_concert(json_file)
