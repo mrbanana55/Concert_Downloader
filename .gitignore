@@ -1,3 +1,6 @@
 build/
 concert_downloader.egg-info/
-**/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
