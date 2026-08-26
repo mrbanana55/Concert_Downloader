@@ -12,17 +12,32 @@ def add_metadata(input_dir: str, output_dir: str, concert):
             "-hide_banner",
             "-loglevel", "quiet",
             "-i", input_file,
-            "-i", concert.cover_image,
-            "-map", "0:a",
-            "-map", "1:v",
+        ]
+
+        if concert.cover_image:
+            command.extend(["-i", str(concert.cover_image)])
+
+        command.extend(["-map", "0:a"])
+
+        if concert.cover_image:
+            command.extend(["-map", "1:v"])
+
+        command.extend([
             "-c", "copy",
             "-metadata", f"title={track.title}",
             "-metadata", f"track={track.number}",
-            "-metadata", f"artist={concert.artist}",
-            "-metadata", f"album={concert.album}",
+        ])
+
+        if concert.artist:
+            command.extend(["-metadata", f"artist={concert.artist}"])
+
+        if concert.album:
+            command.extend(["-metadata", f"album={concert.album}"])
+
+        command.extend([
             "-id3v2_version", "3",
             output_file
-            ]
+        ])
         try:
             subprocess.run(command, check=True)
             logger.info(f"Added metadata to track:{track.title}")
