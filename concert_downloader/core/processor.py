@@ -11,23 +11,13 @@ def pipeline(concert):
     
     if (concert.source_type == 'youtube'):
         try:
-            # Download the audio from YouTube as an MP4 file
+            # Download the audio from YouTube directly as MP3 via yt-dlp
             logger.info(f"Downloading audio from YouTube: {concert.video_url}")
-            downloader.download_audio(concert, 'concert_audio.mp4')
+            downloader.download_audio(concert, 'audio')
+            full_audio_path = 'audio.mp3'
         except Exception as e:
             # If there's an error downloading, print it and exit
             raise ConcertError(f"Error downloading audio from YouTube: {e}") from e
-        try:
-            # Convert the downloaded MP4 file to MP3
-            logger.info("Converting the audio.")
-            audio_extractor.convert_audio('concert_audio.mp4', 'audio.mp3')
-            full_audio_path = 'audio.mp3'  # This is the converted MP3 file path
-            # Remove the original MP4 file after conversion
-            os.remove('concert_audio.mp4') 
-
-        except Exception as e:
-            # If there's an error converting the audio, print it and exit
-            raise ConcertError(f"Error converting audio: {e}") from e
         
     # Case where the source is a local file
     else:
