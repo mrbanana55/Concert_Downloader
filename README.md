@@ -2,6 +2,8 @@
 
 **Concert_Downloader** is a CLI tool that turns a YouTube or local video/audio concert into individually tagged MP3 tracks — complete with metadata and optional cover images.
 
+![til](./concert_downloader_demo.gif)
+
 ---
 
 ## Features
